@@ -1,0 +1,6 @@
+{
+  "name": "ECO",
+  "description": "Jogo sensorial de memória e ritmo audiovisual com síntese sonora em tempo real via Web Audio API, modos Clássico, Tabuleiro Vivo, Eco Reverso e Zen.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
