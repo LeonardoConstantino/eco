@@ -127,6 +127,7 @@ export function App() {
 
   // Game lifecycle
   const handleStartGame = (mode: GameMode) => {
+    audioEngine.resumeContext();
     setSelectedMode(mode);
     setCurrentScene('GAME');
   };
@@ -141,6 +142,7 @@ export function App() {
   };
 
   const handlePlayAgain = () => {
+    audioEngine.resumeContext();
     setCurrentScene('GAME');
   };
 
@@ -152,7 +154,7 @@ export function App() {
   const activePalette = PALETTES[paletteId] || PALETTES.default;
 
   return (
-    <div className="min-h-screen w-full bg-[#050509] text-[#E8ECF2] flex flex-col justify-between overflow-x-hidden select-none">
+    <div className="min-h-[100dvh] w-full bg-[#050509] text-[#E8ECF2] flex flex-col justify-between overflow-x-hidden select-none pb-[env(safe-area-inset-bottom)]">
       {/* Background Subtle Atmosphere */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#111422] via-[#050509] to-[#020205] pointer-events-none -z-10" />
 

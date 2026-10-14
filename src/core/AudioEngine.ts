@@ -45,6 +45,17 @@ export class AudioEngine {
     }
   }
 
+  public async resumeContext(): Promise<void> {
+    this.init();
+    if (this.ctx && this.ctx.state === 'suspended') {
+      try {
+        await this.ctx.resume();
+      } catch {
+        // Ignored
+      }
+    }
+  }
+
   public setSoundTheme(theme: SoundThemeId): void {
     this.currentTheme = theme;
   }

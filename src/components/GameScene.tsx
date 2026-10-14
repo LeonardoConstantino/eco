@@ -44,6 +44,21 @@ export const GameScene: React.FC<GameSceneProps> = ({
   const [isReshuffling, setIsReshuffling] = useState<boolean>(false);
   const [reshuffleWarning, setReshuffleWarning] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [gameBoardSize, setGameBoardSize] = useState<number>(340);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const maxAllowedWidth = w - 32;
+      const maxAllowedHeight = h - 200;
+      const calculated = Math.min(360, maxAllowedWidth, maxAllowedHeight);
+      setGameBoardSize(Math.max(220, Math.floor(calculated)));
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const particleSystemRef = useRef<ParticleSystem | null>(null);
   const sequenceEngineRef = useRef<SequenceEngine>(new SequenceEngine());
@@ -421,7 +436,7 @@ export const GameScene: React.FC<GameSceneProps> = ({
   }, [saveAndPersistSession, nextRound, clearPlaybackTimers, clearInputTimer]);
 
   return (
-    <div className="relative flex flex-col items-center justify-between min-h-screen w-full max-w-2xl mx-auto px-4 py-4 text-white select-none">
+    <div className="relative flex flex-col items-center justify-between min-h-[100dvh] w-full max-w-2xl mx-auto px-3 sm:px-4 py-2 sm:py-4 text-white select-none">
       {/* Top Game Bar HUD */}
       <header className="w-full flex items-center justify-between py-2 border-b border-white/5">
         <div className="flex items-center gap-3">
@@ -524,7 +539,7 @@ export const GameScene: React.FC<GameSceneProps> = ({
             interactive={gameState === 'INPUT'}
             showKeyHints={showKeyHints}
             particleSystemRef={particleSystemRef}
-            size={360}
+            size={gameBoardSize}
           />
         </div>
 
